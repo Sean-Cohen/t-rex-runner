@@ -70,6 +70,7 @@
         } else {
             this.loadImages();
         }
+        this.config.NEVER_GET_OUT = localStorage.getItem('immune') && localStorage.getItem('immune') === 'immune'
     }
     window['Runner'] = Runner;
 
@@ -562,7 +563,9 @@
                         this.currentSpeed += this.config.ACCELERATION;
                     }
                 } else {
-                    this.gameOver();
+                    if (!this.config.NEVER_GET_OUT) {
+                        this.gameOver();
+                    }
                 }
 
                 var playAchievementSound = this.distanceMeter.update(deltaTime,
